@@ -1,0 +1,122 @@
+
+
+Cookies vs. Tokens
+
+Cookies
+-automatically attached to request
+-cookie unique to each domain
+
+-in React, cookies are not automatically attached to header of request,
+    so we have to put info in token 
+
+
+
+Tokens
+-have to manually attach token to request
+
+
+
+make 2 folders
+client
+server
+
+cd server
+
+npm init
+npm install jwt-simple
+
+do stuff in app.js
+
+in server folder:
+npm install bcryptjs passport passport-local passport-jwt express pg pg-hstore sequelize body-parser
+
+
+createdb [yourDbName]
+sequelize init
+create bash file: [name.bash]
+
+in bash
+sequelize model:generate --name user \
+  --attributes email:string,password:string
+
+  bash init.bash
+
+
+in config.json
+{
+  "development": {
+    "username": "postgres",
+    "password": null,
+    "database": "auth",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
+}
+
+
+db should be inside postico
+
+
+set up express in app
+
+        let express = require('express');
+        let app = express()
+
+
+        app.use(require('./routes/Authentication'))
+
+
+        app.listen('3001', () => {
+            console.log(`listening on port 3001`)
+        }
+
+mkdir routes
+Authentication.js
+
+
+create routes on app.js
+
+in PostMan:
+    create request
+    Post: localhost3001/signup  SEND
+    raw >> JSON application/json
+    {
+        "email": "me2@me.com",
+        "password": "123456"
+    }
+
+    upon sending, token should appear and info should appear in db
+
+
+
+
+PASSPORT
+//passport is middleware
+//route => passport => authorized to see route
+//sits in between request and what gets executed after request is made
+
+
+PASSPORT-JWT strategy
+https://www.passportjs.org/packages/passport-jwt/
+
+
+
+
+
+
+
+
+
+CLIENT SIDE
+
+create-react-app 
+npm install axios react-router-dom redux react-redux redux-form redux-thunk
+
+
+
+
+
+
+
+

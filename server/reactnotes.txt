@@ -1,0 +1,40 @@
+REACT INTERVIEW QUESTIONS
+
+
+1. What is React? How is it different from other JS frameworks?
+Virtual DOM
+
+Angular maintained by Google
+-more strict about how you do things, more structured
+React maintained by FaceBook
+-more open about how to do things
+
+
+2. What happens during the lifecycle of a React component?
+life before, after, and during a component's rendering
+initialization (componentWillMount), state updates (setState), destructuring (taken out of DOM)
+
+3. What is the difference between a state and a prop?
+state is internal memory, props allows you to pass data from one component to another component
+
+
+6. What is a stateless function, give an example?
+stateless are for presentational components (kind of dumb)
+stateful are smart components if you need memory or logic
+
+8. What is the purpose of the render function?
+-puts the component in the DOM
+
+9. What is the purpose of ReactDom.render?
+-root level, injects component into original index.html page
+
+10. What does create-react-app do?
+-scaffolds out react app
+-bundle files - bundles all components
+
+
+
+
+
+
+
