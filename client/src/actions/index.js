@@ -1,4 +1,4 @@
-import {AUTH_USER, AUTH_ERROR} from './types';
+import {AUTH_USER, AUTH_ERROR, SAVE_STAR} from './types';
 import axios from 'axios'; //like fetch, except without intermediate function to convert data to JSON
 
 
@@ -31,6 +31,7 @@ export const signup = (formProps, callback) => async dispatch => {
 export const signin = (formProps, callback) => async dispatch => {
     try{
         let response = await axios.post('/signin', formProps);
+        console.log(response.data)
         dispatch({type: AUTH_USER, payload: response.data.token})
         localStorage.setItem('token', response.data.token) //storing JWT inside local storage (cookies)
         callback()
@@ -40,8 +41,6 @@ export const signin = (formProps, callback) => async dispatch => {
     }
 }
 
-
-
 export const signout = () => {
     localStorage.removeItem('token') //clear out local storage on sign out
     return{
@@ -49,3 +48,29 @@ export const signout = () => {
         payload: '' //sending empty string to clear out state
     }
 }
+
+export const saveToDB = (data) => async dispatch => {
+    console.log(data)
+    axios.post('/savedata', {title: data.title, note: data.note, rating:data.rating})
+}
+
+export function saveStar(starRating) {
+    console.log(`starRating: ${starRating.rating}`)
+    return {
+        type: SAVE_STAR, 
+        starRating: starRating.rating
+        }
+}
+
+// export const saveStar = (starRating)  => async dispatch => {
+//     try{
+//     console.log(`starRating: ${starRating.rating}`)
+//     dispatch({
+//         type: SAVE_STAR, 
+//         starRating: starRating.rating
+//         })
+//     }
+//     catch{
+
+//     }
+// }

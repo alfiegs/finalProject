@@ -1,5 +1,11 @@
 import React from 'react';
-import '../App.css'
+import '../App.css';
+import StarRating from './StarRating';
+import { saveToDB } from '../actions';
+import {connect} from 'react-redux';
+
+
+
 
 class Start extends React.Component {
     constructor(props) {
@@ -82,8 +88,14 @@ window.onclick = function(event) {
         })
     }
 
-    handleDidIt = () => {
-
+    handleSave = (note, title, e) => {
+        console.log(`handleSave: title ${title}, note ${note}, rating ${this.props.starRating}`);
+        e.preventDefault();
+        this.props.saveData({
+            title: title,
+            note: note,
+            rating: this.props.starRating
+        })
     }
 
 
@@ -108,6 +120,8 @@ window.onclick = function(event) {
                     </ul>
                     <br /> */}
 
+
+
                     <form onSubmit={this.handleSubmit}>
                     <input 
                     onChange={this.handleQueryChange}
@@ -116,6 +130,7 @@ window.onclick = function(event) {
                     </form>
                     <br />
                     {this.state.query}
+                    {this.props.starRating}
                     <br />
                     {this.state.movies.map((movie, i)=>{
                         let year = movie.release_date.slice(0, 4)
@@ -131,8 +146,16 @@ window.onclick = function(event) {
 
                             <div class="modal-content">
                                 <span class="close">&times;</span>
-                                <p>{movie.title}</p>
+                                <span>{movie.title} ({year})</span>
+                                <StarRating />
+                                <hr />
+                                <span>What did you think?</span>
+                                <br />
+                                <input id="input-notes" /> 
+                                <br />
+                                <button onClick={(e) => this.handleSave(document.getElementById('input-notes').value, movie.title, e)}>Save</button>
                             </div>
+
 
 </div>
                         </>
@@ -168,6 +191,16 @@ window.onclick = function(event) {
     }
 }
 
+let mapDispatchToProps = (dispatch) =>{
+    return {
+        saveData: (data) => dispatch(saveToDB(data))
+    }
+  }
 
+  let mapStateToProps = (state) => {
+    return{
+      starRating: state.main.starRating
+    }
+  }
 
-export default Start
+export default connect(mapStateToProps, mapDispatchToProps)(Start)

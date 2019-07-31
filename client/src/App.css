@@ -102,3 +102,9 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+
+#input-notes{
+  width: 90%;
+  height: 100px;
+}

@@ -11,6 +11,7 @@ export default () => {
       <Link to="/feature">Feature</Link> ||
       <Link to="/page2">Page 2</Link> ||
       <Link to="/start">Start</Link> ||
+      <Link to="/test">Test</Link> ||
     </>
   )
 }

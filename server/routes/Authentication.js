@@ -36,8 +36,9 @@ router.get('/', requireAuth,(req, res) => {//protected page, now requires token 
 
 //when the user signs in, send them a token
 router.post('/signin', requireSignin, (req, res) => { //if passes through local strategy, rest of code executes and user gets token
-    res.send({token: tokenForUse(req.user)}) //
+    res.send({token: tokenForUse(req.user)})
 })
+
 
 router.post('/signup', (req, res) => {
     let email = req.body.email; //req.body.email is where the email from the form submit gets stored
@@ -65,9 +66,19 @@ router.post('/signup', (req, res) => {
     });
 })
 
+router.post('/savedata', (req,res) => {
+    let title = req.body.title;
+    let note = req.body.note;
+    let rating = req.body.rating;
+    db.activity.create({title: title, note: note, rating: rating})
+})
 
 
-
-
+router.get('/api', (req, res) => {
+    db.activity.findAll()
+    .then((results) => {
+        res.json({data:results})
+    })
+})
 
 module.exports = router;

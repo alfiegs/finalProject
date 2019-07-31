@@ -12,6 +12,7 @@ import SignUp from './components/auth/SignUp';
 import Welcome from './components/Welcome';
 import Page from './components/Page';
 import Start from './components/Start';
+import Test from './components/Test';
 import reducers from './reducers/';
 import reduxThunk from 'redux-thunk';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -34,6 +35,7 @@ ReactDOM.render(
             <Route path='/signup' component={SignUp}></Route>
             <Route path='/page2' component={Page}></Route>
             <Route path='/start' component={Start}></Route>
+            <Route path='/test' component={Test}></Route>
             </Switch>
         </App>
         </BrowserRouter>
