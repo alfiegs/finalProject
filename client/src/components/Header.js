@@ -12,6 +12,7 @@ export default () => {
       <Link to="/page2">Page 2</Link> ||
       <Link to="/start">Start</Link> ||
       <Link to="/test">Test</Link> ||
+      <Link to="/users">Users</Link> ||
     </>
   )
 }

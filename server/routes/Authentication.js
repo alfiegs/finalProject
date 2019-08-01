@@ -36,7 +36,7 @@ router.get('/', requireAuth,(req, res) => {//protected page, now requires token 
 
 //when the user signs in, send them a token
 router.post('/signin', requireSignin, (req, res) => { //if passes through local strategy, rest of code executes and user gets token
-    res.send({token: tokenForUse(req.user)})
+    res.send({token: tokenForUse(req.user), id: (req.user.id)})
 })
 
 
@@ -70,13 +70,45 @@ router.post('/savedata', (req,res) => {
     let title = req.body.title;
     let note = req.body.note;
     let rating = req.body.rating;
-    db.activity.create({title: title, note: note, rating: rating})
+    let userid = req.body.userid
+    db.activity.create({title: title, note: note, rating: rating, userid: userid})
 })
 
+// router.post('/saveFriendData', (req, res)=>{
+//     console.log(`in the router: ${req.body}`)
+//     let userid = req.body.userid;
+//     let friendemail = req.body.friendemail;
+//     let friendid = req.body.friendid;
+//     db.friends.create({userid: userid, friend: friendemail, friendid: friendid})
+// })
+
+router.post('/saveFriendData', (req, res)=>{
+    // console.log(`in the router: ${req.body}`)
+    let userid = req.body.userid;
+    let friendemail = req.body.friendemail;
+    let friendid = req.body.friendid;
+    console.log(friendid)
+    db.friends.findAll({where: {userid: userid, friendid: friendid}})
+    .then((results)=>{
+        // console.log(results)
+        if(results.length === 0){
+            db.friends.create({userid: userid, friend: friendemail, friendid: friendid})
+        }else{
+            console.log('already friends')
+        }
+    })
+})
 
 router.get('/api', (req, res) => {
     db.activity.findAll()
     .then((results) => {
+        res.json({data:results})
+    })
+})
+
+router.get('/users', (req, res) => {
+    db.user.findAll()
+    .then((results)=>{
         res.json({data:results})
     })
 })

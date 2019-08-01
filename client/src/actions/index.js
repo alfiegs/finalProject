@@ -18,8 +18,9 @@ export const signup = (formProps, callback) => async dispatch => {
     let response = await axios.post('/signup', formProps) //posting this data to signup route, should receive JWT. using async await, awaiting response before executing next code
     console.log(response)
     //dispatch 
-    dispatch({type: AUTH_USER, payload: response.data.token})
+    dispatch({type: AUTH_USER, payload: response.data.token, id: response.data.id})
     localStorage.setItem('token', response.data.token) //storing JWT inside local storage (cookies)
+    localStorage.setItem('id', response.data.token) 
     callback();
     }
     catch(e){//
@@ -31,9 +32,10 @@ export const signup = (formProps, callback) => async dispatch => {
 export const signin = (formProps, callback) => async dispatch => {
     try{
         let response = await axios.post('/signin', formProps);
-        console.log(response.data)
-        dispatch({type: AUTH_USER, payload: response.data.token})
+        // console.log(response.data.id)
+        dispatch({type: AUTH_USER, payload: response.data.token, id: response.data.id})
         localStorage.setItem('token', response.data.token) //storing JWT inside local storage (cookies)
+        localStorage.setItem('id', response.data.id)
         callback()
     }
     catch(e){
@@ -43,15 +45,22 @@ export const signin = (formProps, callback) => async dispatch => {
 
 export const signout = () => {
     localStorage.removeItem('token') //clear out local storage on sign out
+    localStorage.removeItem('id')
     return{
         type: AUTH_USER,
-        payload: '' //sending empty string to clear out state
+        payload: '', //sending empty string to clear out state
+        id: 0
     }
 }
 
 export const saveToDB = (data) => async dispatch => {
+    // console.log(data)
+    axios.post('/savedata', {userid: data.userid, title: data.title, note: data.note, rating:data.rating})
+}
+
+export const saveFriendToDB = (data) => async dispatch => {
     console.log(data)
-    axios.post('/savedata', {title: data.title, note: data.note, rating:data.rating})
+    axios.post('/saveFriendData', {friendemail: data.friendemail, friendid: data.friendid, userid: data.userid})
 }
 
 export function saveStar(starRating) {
@@ -61,6 +70,16 @@ export function saveStar(starRating) {
         starRating: starRating.rating
         }
 }
+
+
+
+
+
+
+
+
+
+
 
 // export const saveStar = (starRating)  => async dispatch => {
 //     try{

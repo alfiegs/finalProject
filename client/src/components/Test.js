@@ -60,7 +60,9 @@ class Test extends React.Component {
       <br />
       
       {activitiesList.map((x)=> {
-        return <p>{x.title} - {x.note} - {x.rating}</p>
+        // var date = new Date(x.createdAt);
+        // var year = date.getFullYear
+        return <p>{x.userid} - {x.title} - {x.note} - {x.rating} - {x.createdAt}</p>
       })}
       </>
     );

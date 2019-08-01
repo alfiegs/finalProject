@@ -91,10 +91,13 @@ window.onclick = function(event) {
     handleSave = (note, title, e) => {
         console.log(`handleSave: title ${title}, note ${note}, rating ${this.props.starRating}`);
         e.preventDefault();
+        let idFromLocalStorage = localStorage.getItem("id")
+        console.log(idFromLocalStorage)
         this.props.saveData({
             title: title,
             note: note,
-            rating: this.props.starRating
+            rating: this.props.starRating,
+            userid: idFromLocalStorage
         })
     }
 
@@ -199,7 +202,8 @@ let mapDispatchToProps = (dispatch) =>{
 
   let mapStateToProps = (state) => {
     return{
-      starRating: state.main.starRating
+      starRating: state.main.starRating,
+      userId: state.auth.userId
     }
   }
 
