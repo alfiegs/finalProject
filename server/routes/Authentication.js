@@ -36,13 +36,14 @@ router.get('/', requireAuth,(req, res) => {//protected page, now requires token 
 
 //when the user signs in, send them a token
 router.post('/signin', requireSignin, (req, res) => { //if passes through local strategy, rest of code executes and user gets token
-    res.send({token: tokenForUse(req.user), id: (req.user.id)})
+    console.log(`req.user.email ${req.user.email}`)
+    res.send({token: tokenForUse(req.user), id: (req.user.id), username: (req.user.email)})
 })
 
 
 router.post('/signup', (req, res) => {
     let email = req.body.email; //req.body.email is where the email from the form submit gets stored
-
+    let bio = req.body.bio;
     let password = bcrypt.hashSync(req.body.password, 8); //8 is salt, how many times pw gets mixed up
     if (!email || !password){
         return res.status(422).send({error: 'You must provide an email and a password'}) //requires email and password, error status if no email or password
@@ -53,9 +54,10 @@ router.post('/signup', (req, res) => {
         //test to see if there is anything in this array. if so, the email is already in use
         if(results.length === 0){
             //if = 0, add record to db because there is no record for this email
-            db.user.create({email: email, password: password}) //from variables above, create user
+            db.user.create({email: email, password: password, bio: bio}) //from variables above, create user
             .then((user) => { //user = user info that was just created
-                return res.json({token: tokenForUse(user)})
+                console.log(`username: ${user.email}`)
+                return res.json({token: tokenForUse(user), id: (user.id), username: (user.email)})
             })
         }else{
             return res.status(422).send({error: 'Email already in use'}) //error to send if email exists
@@ -71,7 +73,10 @@ router.post('/savedata', (req,res) => {
     let note = req.body.note;
     let rating = req.body.rating;
     let userid = req.body.userid
-    db.activity.create({title: title, note: note, rating: rating, userid: userid})
+    let username = req.body.username
+    let friendid = req.body.friendid
+    console.log(`username in route: ${username}`)
+    db.activity.create({title: title, note: note, rating: rating, userid: userid, username: username, friendid: friendid})
 })
 
 // router.post('/saveFriendData', (req, res)=>{
@@ -105,6 +110,25 @@ router.get('/api', (req, res) => {
         res.json({data:results})
     })
 })
+
+router.get('/friendsTable', (req, res) => {
+    db.friends.findAll()
+    .then((results) => {
+        res.json({data:results})
+    })
+})
+
+
+
+// router.post('/friendsTable', (req, res) => {
+//     let id = req.body.id
+//     console.log(`hello: ${id.id}`)
+//     db.friends.findAll({where: {userid: id}})
+//     .then((results) => {
+//         console.log(results)
+//         res.json({data:results})
+//     })
+// })
 
 router.get('/users', (req, res) => {
     db.user.findAll()
