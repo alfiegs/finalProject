@@ -43,6 +43,16 @@ class SignUp extends React.Component {
           autoComplete="none"
         />
         </fieldset>
+
+        <fieldset>
+          <label>Bio</label>
+          <Field 
+          name="bio"
+          type="textarea"
+          component="input"
+          autoComplete="none"
+        />
+        </fieldset>
         <div>{this.props.errorMessage}</div>
         <button>Sign Up</button>
       </form>

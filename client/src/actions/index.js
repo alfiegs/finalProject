@@ -1,4 +1,4 @@
-import {AUTH_USER, AUTH_ERROR, SAVE_STAR} from './types';
+import {AUTH_USER, AUTH_ERROR, SAVE_STAR, SEND_ID} from './types';
 import axios from 'axios'; //like fetch, except without intermediate function to convert data to JSON
 
 
@@ -20,8 +20,9 @@ export const signup = (formProps, callback) => async dispatch => {
     //dispatch 
     dispatch({type: AUTH_USER, payload: response.data.token, id: response.data.id})
     localStorage.setItem('token', response.data.token) //storing JWT inside local storage (cookies)
-    localStorage.setItem('id', response.data.token) 
-    callback();
+    localStorage.setItem('id', response.data.id) 
+    localStorage.setItem('username', response.data.username)
+    callback(); 
     }
     catch(e){//
         dispatch({type: AUTH_ERROR, payload: "Email already in use."}) //error to send
@@ -36,6 +37,7 @@ export const signin = (formProps, callback) => async dispatch => {
         dispatch({type: AUTH_USER, payload: response.data.token, id: response.data.id})
         localStorage.setItem('token', response.data.token) //storing JWT inside local storage (cookies)
         localStorage.setItem('id', response.data.id)
+        localStorage.setItem('username', response.data.username)
         callback()
     }
     catch(e){
@@ -55,7 +57,7 @@ export const signout = () => {
 
 export const saveToDB = (data) => async dispatch => {
     // console.log(data)
-    axios.post('/savedata', {userid: data.userid, title: data.title, note: data.note, rating:data.rating})
+    axios.post('/savedata', {userid: data.userid, title: data.title, note: data.note, rating:data.rating, username:data.username, friendid: data.friendid})
 }
 
 export const saveFriendToDB = (data) => async dispatch => {
@@ -70,6 +72,14 @@ export function saveStar(starRating) {
         starRating: starRating.rating
         }
 }
+
+
+export const saveIdAction = (id) => async dispatch => {
+    console.log(id.id)
+    axios.post('/friendsTable', {id: id})
+}
+
+
 
 
 

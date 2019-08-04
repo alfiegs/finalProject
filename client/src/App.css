@@ -108,3 +108,22 @@
   width: 90%;
   height: 100px;
 }
+
+
+
+/* YOUR FEED */
+
+
+.feed-post{
+  height: 2em;
+}
+
+.feed-post-date{
+  font-size: 10px;
+  /* display: block; */
+}
+
+.feed-post-overflow{
+  height: 1.5em;
+  overflow: scroll;
+}

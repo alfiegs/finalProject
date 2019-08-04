@@ -14,6 +14,7 @@ import Page from './components/Page';
 import Start from './components/Start';
 import Test from './components/Test';
 import Users from './components/Users';
+import YourFeed from './components/YourFeed';
 import reducers from './reducers/';
 import reduxThunk from 'redux-thunk';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -38,6 +39,7 @@ ReactDOM.render(
             <Route path='/start' component={Start}></Route>
             <Route path='/test' component={Test}></Route>
             <Route path='/users' component={Users}></Route>
+            <Route path='/yourfeed' component={YourFeed}></Route>
             </Switch>
         </App>
         </BrowserRouter>

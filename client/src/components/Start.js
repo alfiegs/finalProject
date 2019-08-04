@@ -3,6 +3,7 @@ import '../App.css';
 import StarRating from './StarRating';
 import { saveToDB } from '../actions';
 import {connect} from 'react-redux';
+import {Row, Col} from 'react-bootstrap';
 
 
 
@@ -88,52 +89,44 @@ window.onclick = function(event) {
         })
     }
 
-    handleSave = (note, title, e) => {
+    handleSave = (note, title, modalId, e) => {
         console.log(`handleSave: title ${title}, note ${note}, rating ${this.props.starRating}`);
+        var modal = document.getElementById(modalId);
         e.preventDefault();
         let idFromLocalStorage = localStorage.getItem("id")
+        let usernameFromLocalStorage = localStorage.getItem("username")
         console.log(idFromLocalStorage)
+        console.log(usernameFromLocalStorage)
         this.props.saveData({
-            title: title,
+            title: `Watched: ${title}`,
             note: note,
             rating: this.props.starRating,
-            userid: idFromLocalStorage
+            userid: idFromLocalStorage,
+            friendid: idFromLocalStorage,
+            username: usernameFromLocalStorage
         })
+        modal.style.display = "none";
     }
 
 
     render() {
-        console.log(this.state.query);
-        console.log(this.state.movies);
+        // console.log(this.state.query);
+        // console.log(this.state.movies);
+        let imgURLBase = "https://image.tmdb.org/t/p/w185_and_h278_bestv2/"
         return (
             <>
-                    {/* <form onSubmit={this.handleSubmit}>
-                    <input 
-                    onChange={this.handleQueryChange}
-                    />
-                    <button type="submit">submit</button>
-                    </form>
-                    <br />
-                    {this.state.query}
-                    <br />
-                    <ul>
-                    {this.state.movies.map((movie, i)=>{
-                        return <li key={i}>{movie.title}</li>
-                    })}
-                    </ul>
-                    <br /> */}
-
-
-
+                    <h4>What movie did you watch today?</h4>
                     <form onSubmit={this.handleSubmit}>
                     <input 
                     onChange={this.handleQueryChange}
+                    placeholder='Type Movie Here'
+
                     />
                     <button type="submit">submit</button>
                     </form>
                     <br />
-                    {this.state.query}
-                    {this.props.starRating}
+                    {/* {this.state.query}
+                    {this.props.starRating} */}
                     <br />
                     {this.state.movies.map((movie, i)=>{
                         let year = movie.release_date.slice(0, 4)
@@ -142,8 +135,13 @@ window.onclick = function(event) {
                         return <>
                         <button key={"expand"+i} onClick={this.movieClick} className="accordion">{movie.title} ({year})</button>
                         <div key={"infodiv"+i} className="panel">
-                        <span key={"info"+i}>{movie.overview}</span>
+                        <Row>
+                        <Col md={2}><img src={imgURLBase+movie.poster_path}></img></Col>
+                        <Col key={"info"+i}>{movie.overview}
+                        <br />
                         <button id={buttonId} class="diditbutton" key={"save"+i} onClick={(e) => this.didIt(buttonId, modalId, e)}>Did It</button>
+                        </Col>
+                        </Row>
                         </div>
                             <div id={modalId} class="modal">
 
@@ -156,7 +154,7 @@ window.onclick = function(event) {
                                 <br />
                                 <input id="input-notes" /> 
                                 <br />
-                                <button onClick={(e) => this.handleSave(document.getElementById('input-notes').value, movie.title, e)}>Save</button>
+                                <button onClick={(e) => this.handleSave(document.getElementById('input-notes').value, movie.title, modalId, e)}>Save</button>
                             </div>
 
 

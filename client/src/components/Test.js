@@ -7,7 +7,9 @@ class Test extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activities: []
+      activities: [],
+      friends: [],
+      userid: 0
     }
     
   }
@@ -23,11 +25,20 @@ class Test extends React.Component {
   }
 
   componentWillMount(){
+    let userid = localStorage.getItem("id")
     axios.get('/api')
     .then((data)=>{
       console.log(data.data.data)
       this.setState({
         activities: data.data.data
+      })
+    })
+    axios.get('/friendsTable')
+    .then((data)=>{
+      console.log(data.data.data)
+      this.setState({
+        friends: data.data.data,
+        userid: userid
       })
     })
   }
@@ -36,6 +47,14 @@ class Test extends React.Component {
   render() {
     let activitiesList = this.state.activities.reverse()
     console.log(this.state.activities)
+    let friendsList = []
+    let test = parseInt(this.state.userid)
+    this.state.friends.forEach((entry)=>{
+      if(entry.userid === test)
+      friendsList.push(entry.friendid)
+    })
+    console.log(test)
+    console.log(friendsList)
     return (
       <>
       <form onSubmit={(e) => this.handleSave(document.getElementById('title').value, document.getElementById('note').value, document.getElementById('rating').value, e)}>
@@ -62,8 +81,14 @@ class Test extends React.Component {
       {activitiesList.map((x)=> {
         // var date = new Date(x.createdAt);
         // var year = date.getFullYear
-        return <p>{x.userid} - {x.title} - {x.note} - {x.rating} - {x.createdAt}</p>
+        if(friendsList.includes(x.userid)){
+        return <p>{x.userid} - {x.username} - {x.title} - {x.note} - {x.rating} - {x.createdAt}</p>
+        }
       })}
+      <br />
+      {/* {this.state.friends.map((y)=> {
+        return <p>{y.friend}, {y.friendid}</p>
+      })} */}
       </>
     );
   }
