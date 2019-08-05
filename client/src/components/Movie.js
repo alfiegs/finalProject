@@ -3,7 +3,8 @@ import '../App.css';
 import StarRating from './StarRating';
 import { saveToDB } from '../actions';
 import {connect} from 'react-redux';
-import {Row, Col} from 'react-bootstrap';
+import {Container, Row, Col} from 'react-bootstrap';
+
 
 
 
@@ -99,11 +100,10 @@ window.onclick = function(event) {
         console.log(idFromLocalStorage)
         console.log(usernameFromLocalStorage)
         this.props.saveData({
-            title: `Watched: ${title}`,
+            title: title,
             note: note,
             rating: this.props.starRating,
             userid: idFromLocalStorage,
-            friendid: idFromLocalStorage,
             username: usernameFromLocalStorage
         })
         modal.style.display = "none";
@@ -116,15 +116,26 @@ window.onclick = function(event) {
         let imgURLBase = "https://image.tmdb.org/t/p/w185_and_h278_bestv2/"
         return (
             <>
+            <Row>
+                <Col md={1}></Col>
+                <Col>
+                <div class="movie-form">
                     <h4>What movie did you watch today?</h4>
                     <form onSubmit={this.handleSubmit}>
                     <input 
+                    class="movie-input"
                     onChange={this.handleQueryChange}
                     placeholder='Type Movie Here'
 
                     />
                     <button type="submit">submit</button>
                     </form>
+                </div>
+                </Col>
+            </Row>
+            <Row>
+            <Col md={1}></Col>
+            <Col xs={10}>
                     <br />
                     {/* {this.state.query}
                     {this.props.starRating} */}
@@ -163,7 +174,9 @@ window.onclick = function(event) {
                         </>
                     })}
                     <br />
-
+                    </Col>
+                    <Col md={1}></Col>
+                    </Row>
 
 
                     {/* <button class="accordion">Section 1</button>

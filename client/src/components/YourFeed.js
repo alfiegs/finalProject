@@ -43,6 +43,7 @@ class YourFeed extends React.Component {
                     if(x.userid === userIdInt){
                     return <>
                     <div class="feed-post">
+                    <hr />
                     <Row >
                         <Col md={3}>
                             {x.title}

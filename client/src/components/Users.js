@@ -20,7 +20,8 @@ class Users extends React.Component {
         .then((data)=>{
           console.log(data.data.data)
           this.setState({
-            users: data.data.data
+            users: data.data.data,
+            error: ""
           })
         })
       }
@@ -28,12 +29,21 @@ class Users extends React.Component {
     handleSaveUser = (email, id, e) => {
         e.preventDefault();
         console.log(`friend info: email - ${email}, id - ${id}`)
-        let idFromLocalStorage = localStorage.getItem("id")
+        let idFromLocalStorage = parseInt(localStorage.getItem("id"));
+        console.log(idFromLocalStorage)
+        console.log(id)
+        if(idFromLocalStorage === id){
+          console.log('error')
+          this.setState({
+            error: "You can't friend yourself."
+          })
+        }else{
         this.props.saveFriend({
             friendemail: email,
             friendid: id,
             userid: idFromLocalStorage
         })
+      }
         // alert(`You started following ${email}`)
     }
 
@@ -41,6 +51,7 @@ class Users extends React.Component {
         return (
             <>
             <h1>Users</h1>
+            <p>{this.state.error}</p>
             <ul>
             {this.state.users.map((user)=>{
                 return <li onClick={(e) => this.handleSaveUser(user.email, user.id, e)}>{user.email}{`, id: ${user.id}`}</li>
