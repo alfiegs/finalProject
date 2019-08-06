@@ -30,7 +30,7 @@ class SignUp extends React.Component {
         <h4>Sign Up</h4>
         <br />
         <fieldset> 
-        <label>Username</label>
+        <label>Choose a username</label>
         <br/>
         <Field 
           name="email"
@@ -38,11 +38,12 @@ class SignUp extends React.Component {
           component="input"
           autoComplete="none"
           class="sign-in-input"
+          placeholder="username"
         />
         </fieldset>
 
         <fieldset>
-          <label>Password</label>
+          <label>Choose a password</label>
           <br/>
           <Field 
           name="password"
@@ -50,6 +51,7 @@ class SignUp extends React.Component {
           component="input"
           autoComplete="none"
           class="sign-in-input"
+          placeholder="password"
         />
         </fieldset>
 
@@ -62,6 +64,7 @@ class SignUp extends React.Component {
           component="textarea"
           autoComplete="none"
           class="sign-up-bio"
+          placeholder="What are you into?"
         />
         </fieldset>
         <div>{this.props.errorMessage}</div>

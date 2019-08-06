@@ -4,6 +4,7 @@ import FeedStars from './FeedStars';
 import {Container, Row, Col} from 'react-bootstrap';
 import requireAuth from '../requireAuth';
 import {connect} from 'react-redux';
+import Tooltip from './Tooltip';
 
 
 
@@ -57,13 +58,14 @@ class YourFeed extends React.Component {
                         <Col md={2}>
                             <FeedStars rating={x.rating}/>  
                         </Col>
-                        <Col>
-                            <div class="feed-post-overflow">
+                        <Col >
+                            <div class="feed-post-overflow ">
                             {x.note}
                             </div>
+                            {/* <Tooltip note={x.note}/> */}
                         </Col>
                         <Col md={2}>
-                            
+                            {/* <p class="feed-post-date">{x.createdAt}</p> */}
                             <span class="feed-post-date">Posted on </span>
                             <span class="feed-post-date">{month}-{day}-{year} at {hour}:{minutes}</span>
                         </Col>

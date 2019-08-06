@@ -31,7 +31,7 @@ class SignIn extends React.Component {
           <form onSubmit={handleSubmit(this.onSubmit)}>
             <br />
             <fieldset> 
-            <label>Email: </label>
+            <label>Username: </label>
             <br />
             <Field 
               name="email"
@@ -39,6 +39,7 @@ class SignIn extends React.Component {
               component="input"
               autoComplete="none"
               class="sign-in-input"
+              placeholder="username"
             />
             </fieldset>
 
@@ -51,6 +52,7 @@ class SignIn extends React.Component {
               component="input"
               autoComplete="none"
               class="sign-in-input"
+              placeholder="password"
             />
             </fieldset>
             <div>{this.props.errorMessage}</div>

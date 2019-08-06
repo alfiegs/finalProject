@@ -15,7 +15,8 @@ class Header extends React.Component {
   }
 
 
-componentWillMount() {
+
+componentDidMount() {
   let userid = localStorage.getItem("id")
   let username = localStorage.getItem("username")
   let Welcome = `Welcome ${username}!`;
@@ -35,8 +36,16 @@ componentWillMount() {
 }
 
   render() {
-
-
+    let userid = localStorage.getItem("id")
+    let username = localStorage.getItem("username")
+    let Welcome = `Welcome ${username}!`;
+    let SignIn = `Sign In`;
+    let message = ``
+    if (username===null){
+      message = SignIn
+    }else{
+      message = Welcome
+    }
     return (
       <>
 
@@ -61,7 +70,7 @@ componentWillMount() {
               <Nav.Link class="nav-button" href="/friendlist">Your Friends</Nav.Link>
             </Nav>
             <Nav className="mr-auto">
-            <NavDropdown class="user-greeting" title={this.state.message} id="basic-nav-dropdown">
+            <NavDropdown class="user-greeting" title={message} id="basic-nav-dropdown">
             <NavDropdown.Item href="/signup">Sign Up</NavDropdown.Item>
             <NavDropdown.Item href="/signin">Sign In</NavDropdown.Item>
             <NavDropdown.Item href="/signout">Sign Out</NavDropdown.Item>
