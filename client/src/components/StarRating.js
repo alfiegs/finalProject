@@ -13,10 +13,11 @@ class Test extends React.Component {
           };
     }
 
+
     onStarClick(nextValue, prevValue, name) {
         this.setState({rating: nextValue});
         this.props.starClick({
-          rating: this.state.rating
+          rating: nextValue
         })
       }
     

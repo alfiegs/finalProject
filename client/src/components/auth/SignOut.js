@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
+import {Row, Col} from 'react-bootstrap';
 
 
 
@@ -17,7 +18,28 @@ class SignOut extends React.Component {
   render() {
     return (
       <>
-      Sorry to see you go :(
+      <Row>
+        <Col md={3}></Col>
+        <Col md={6}>
+          You've successfully signed out. See you again soon!
+          <br/>
+          <br />
+            <p>وداعا!
+              مع السلامة!</p>
+            <p>再见了！</p>
+            <p>Au revoir!</p>
+            <p>Auf Wiedersehen!</p>
+            <p>Αντίο σας!</p>
+            <p>अलविदा!</p>
+            <p>さよなら</p>
+            <p>안녕!</p>
+            <p>خدا حافظ!</p>
+            <p>До свидания!</p>
+            <p>Hwyl fawr!</p>
+
+        </Col>
+        <Col md={3}></Col>
+      </Row>
       </>
     );
   }

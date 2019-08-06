@@ -4,6 +4,7 @@ import StarRating from './StarRating';
 import {Button} from 'react-bootstrap';
 import { saveToDB } from '../actions';
 import {connect} from 'react-redux';
+import requireAuth from '../requireAuth';
 
 
 
@@ -93,4 +94,4 @@ let mapDispatchToProps = (dispatch) =>{
     }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Other)
+  export default requireAuth(connect(mapStateToProps, mapDispatchToProps)(Other))

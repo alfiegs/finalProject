@@ -2,7 +2,8 @@ import React from 'react';
 import {Field, reduxForm} from 'redux-form';  //field is equivalent to input field
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
-import {compose} from 'redux'
+import {compose} from 'redux';
+import {Row, Col} from 'react-bootstrap';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -15,47 +16,62 @@ class SignUp extends React.Component {
   onSubmit = (formProps) => { //everything inside our form
     console.log(formProps)
     this.props.signup(formProps, ()=>{//signup from actions index, kicks off action function
-      this.props.history.push('/feature') //part of react-router-dom; when our user has authenticated, we direct them to protected page
+      this.props.history.push('/yourfeed') //part of react-router-dom; when our user has authenticated, we direct them to protected page
     }) 
   }
 
   render() {
     const { handleSubmit } = this.props //handleSubmit is function from redux-forms that takes in a function we create, onSubmit
-    return (
+    return (<>
+    <Row>
+    <Col md={4}></Col>
+    <Col>
       <form onSubmit={handleSubmit(this.onSubmit)}>
+        <h4>Sign Up</h4>
         <br />
         <fieldset> 
-        <label>Email</label>
+        <label>Username</label>
+        <br/>
         <Field 
           name="email"
           type="text"
           component="input"
           autoComplete="none"
+          class="sign-in-input"
         />
         </fieldset>
 
         <fieldset>
           <label>Password</label>
+          <br/>
           <Field 
           name="password"
           type="password"
           component="input"
           autoComplete="none"
+          class="sign-in-input"
         />
         </fieldset>
 
         <fieldset>
-          <label>Bio</label>
+          <label>Introduce Yourself!</label>
+          <br/>
           <Field 
           name="bio"
           type="textarea"
-          component="input"
+          component="textarea"
           autoComplete="none"
+          class="sign-up-bio"
         />
         </fieldset>
         <div>{this.props.errorMessage}</div>
-        <button>Sign Up</button>
+        <br/>
+        <button class="sign-in-button">Sign Up</button>
       </form>
+      </Col>
+      <Col md={4}></Col>
+      </Row>
+    </>
     );
   }
 }

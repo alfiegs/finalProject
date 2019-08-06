@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import {Row,Col,Button} from 'react-bootstrap';
+import requireAuth from '../requireAuth';
+import {connect} from 'react-redux';
+
 
 class FriendList extends React.Component {
     constructor(props) {
@@ -57,4 +60,4 @@ class FriendList extends React.Component {
 
 
 
-export default FriendList
+export default requireAuth(connect(null, null)(FriendList))

@@ -3,6 +3,8 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import { saveFriendToDB } from '../actions';
 import {Col, Row} from 'react-bootstrap';
+import requireAuth from '../requireAuth';
+
 
 
 
@@ -90,4 +92,4 @@ let mapDispatchToProps = (dispatch) =>{
     }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users)
+  export default requireAuth(connect(mapStateToProps, mapDispatchToProps)(Users))

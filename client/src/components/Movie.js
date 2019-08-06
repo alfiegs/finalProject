@@ -44,17 +44,15 @@ didIt = (buttonId, modalId, e) => {
     e.preventDefault();
     // Get the modal
 var modal = document.getElementById(modalId);
-
 // Get the button that opens the modal
 var btn = document.getElementById(buttonId);
-
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal 
-btn.onclick = function() {
+
   modal.style.display = "block";
-}
+
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
@@ -86,7 +84,7 @@ window.onclick = function(event) {
             return response.json()
         })
         .then((data)=>{
-            console.log(data)
+            // console.log(data)
             this.setState({
                 movies: data.results,
             }) 
@@ -174,7 +172,7 @@ render() {
                             <hr />
                             <span>What did you think?</span>
                             <br />
-                            <input id="input-notes" /> 
+                            <textarea id="input-notes" />
                             <br />
                             <button onClick={(e) => this.handleSave(document.getElementById('input-notes').value, movie.title, modalId, e)}>Save</button>
                         </div>
@@ -231,6 +229,6 @@ let mapDispatchToProps = (dispatch) =>{
     }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Start)
-// export default requireAuth(connect(mapStateToProps, mapDispatchToProps)(Start))
+// export default connect(mapStateToProps, mapDispatchToProps)(Start)
+export default requireAuth(connect(mapStateToProps, mapDispatchToProps)(Start))
 // export default requireAuth(Feature)

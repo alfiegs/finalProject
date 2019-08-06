@@ -8,7 +8,8 @@ class Header extends React.Component {
     super(props);
     this.state = {
       userid: 0,
-      username: ""
+      username: "",
+      message: ""
     }
     
   }
@@ -17,14 +18,25 @@ class Header extends React.Component {
 componentWillMount() {
   let userid = localStorage.getItem("id")
   let username = localStorage.getItem("username")
+  let Welcome = `Welcome ${username}!`;
+  let SignIn = `Sign In`;
+  let message = ``
+  if (username===null){
+    message = SignIn
+  }else{
+    message = Welcome
+  }
   console.log(userid)
   this.setState({
     userid: userid,
-    username: username
+    username: username,
+    message: message
   })
 }
 
   render() {
+
+
     return (
       <>
 
@@ -48,7 +60,13 @@ componentWillMount() {
               <Nav.Link class="nav-button" href="/yourfeed">Your Feed</Nav.Link>
               <Nav.Link class="nav-button" href="/friendlist">Your Friends</Nav.Link>
             </Nav>
-            <span id="user-greeting">Welcome {this.state.username}!</span>
+            <Nav className="mr-auto">
+            <NavDropdown class="user-greeting" title={this.state.message} id="basic-nav-dropdown">
+            <NavDropdown.Item href="/signup">Sign Up</NavDropdown.Item>
+            <NavDropdown.Item href="/signin">Sign In</NavDropdown.Item>
+            <NavDropdown.Item href="/signout">Sign Out</NavDropdown.Item>
+            </NavDropdown>
+            </Nav>
             {/* <Form inline>
               <FormControl type="text" placeholder="Search" className="mr-sm-2" />
               <Button variant="outline-success">Search</Button>

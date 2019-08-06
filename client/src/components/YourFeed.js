@@ -1,7 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import FeedStars from './FeedStars';
-import {Container, Row, Col} from 'react-bootstrap'
+import {Container, Row, Col} from 'react-bootstrap';
+import requireAuth from '../requireAuth';
+import {connect} from 'react-redux';
+
+
 
 
 class YourFeed extends React.Component {
@@ -76,4 +80,4 @@ class YourFeed extends React.Component {
 }
 
 
-export default YourFeed
+export default requireAuth(connect(null, null)(YourFeed))

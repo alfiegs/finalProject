@@ -3,6 +3,8 @@ import {Container, Row, Col} from 'react-bootstrap';
 import StarRating from './StarRating';
 import { saveToDB } from '../actions';
 import {connect} from 'react-redux';
+import requireAuth from '../requireAuth';
+
 
 class Book extends React.Component {
     constructor(props) {
@@ -47,9 +49,7 @@ class Book extends React.Component {
     var span = document.getElementsByClassName("close")[0];
     
     // When the user clicks on the button, open the modal 
-    btn.onclick = function() {
       modal.style.display = "block";
-    }
     
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
@@ -155,7 +155,7 @@ class Book extends React.Component {
                                 <hr />
                                 <span>What did you think?</span>
                                 <br />
-                                <input id="input-notes" 
+                                <textarea id="input-notes" 
                                 onChange={this.handleNoteChange}
                                 />
                                 <br />
@@ -184,4 +184,4 @@ let mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Book)
+export default requireAuth(connect(mapStateToProps, mapDispatchToProps)(Book))

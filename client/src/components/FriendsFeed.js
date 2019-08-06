@@ -4,6 +4,8 @@ import { saveToDB } from '../actions';
 import axios from 'axios';
 import {Container, Row, Col} from 'react-bootstrap';
 import FeedStars from './FeedStars';
+import requireAuth from '../requireAuth';
+
 
 
 class Test extends React.Component {
@@ -147,4 +149,4 @@ let mapDispatchToProps = (dispatch) =>{
 
 
 
-export default connect(null, mapDispatchToProps)(Test)
+export default requireAuth(connect(null, mapDispatchToProps)(Test))
