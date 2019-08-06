@@ -29,18 +29,18 @@ componentWillMount() {
       <>
 
 
-        <Navbar variant="dark" expand="lg" class="navbar">
+        <Navbar variant="dark" expand="lg" class="navbar" sticky="top" >
           <Navbar.Brand id="nav-brand" href="/">What I Did Today</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <NavDropdown title="What Did You Do Today?" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/movie">Movie</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Book</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Restaurant</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Recipe</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Event</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Restaurant</NavDropdown.Item>
+                <NavDropdown.Item href="/book">Book</NavDropdown.Item>
+                <NavDropdown.Item href="/place">Place</NavDropdown.Item>
+                <NavDropdown.Item disabled={true} href="#action/3.3">Recipe</NavDropdown.Item>
+                <NavDropdown.Item disabled={true} href="#action/3.3">Event</NavDropdown.Item>
+                <NavDropdown.Item disabled={true} href="#action/3.3">Restaurant</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/other">Other</NavDropdown.Item>
               </NavDropdown>

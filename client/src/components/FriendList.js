@@ -17,7 +17,7 @@ class FriendList extends React.Component {
 
         axios.get('/friendsTable')
             .then((data) => {
-                // console.log(data.data.data)
+                console.log(data.data.data)
                 this.setState({
                     friends: data.data.data,
                     userid: userid
@@ -38,7 +38,7 @@ class FriendList extends React.Component {
                 if(entry.userid === userid){
                 return <>
                 <div class="friend-bubble">
-                {entry.friend}
+                {entry.friend} {entry.email}
                 </div>
                 </>
                 }

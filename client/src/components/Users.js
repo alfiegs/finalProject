@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import { saveFriendToDB } from '../actions';
+import {Col, Row} from 'react-bootstrap';
 
 
 
@@ -10,7 +11,8 @@ class Users extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: []
+            users: [],
+            error: ""
         }
         
     }
@@ -21,7 +23,6 @@ class Users extends React.Component {
           console.log(data.data.data)
           this.setState({
             users: data.data.data,
-            error: ""
           })
         })
       }
@@ -44,19 +45,33 @@ class Users extends React.Component {
             userid: idFromLocalStorage
         })
       }
-        // alert(`You started following ${email}`)
+        alert(`You started following ${email}`)
     }
 
     render() {
         return (
             <>
-            <h1>Users</h1>
+            <Row>
+            <Col md={2}></Col>
+            <Col>
+            <h1>Potential Friends</h1>
             <p>{this.state.error}</p>
-            <ul>
             {this.state.users.map((user)=>{
-                return <li onClick={(e) => this.handleSaveUser(user.email, user.id, e)}>{user.email}{`, id: ${user.id}`}</li>
+                return <>
+                <div class="user-bubble">
+                <b>{user.email}</b>
+                <hr />
+                <p>About {user.email}:</p>
+                {user.bio}
+                <br />
+                <br />
+                <button class="user-add-button" onClick={(e) => this.handleSaveUser(user.email, user.id, e)}>Add Friend</button>
+                </div>
+                </>
             })}
-            </ul>
+            </Col>
+            <Col md={2}></Col>
+            </Row>
             </>
         );
     }

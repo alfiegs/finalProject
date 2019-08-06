@@ -111,7 +111,9 @@ class Test extends React.Component {
                             {x.username}
                         </Col>
                         <Col md={3}>
+                        <div class="feed-post-overflow">
                             {x.title}
+                        </div>
                         </Col>
                         <Col md={2}>
                             <FeedStars rating={x.rating}/>  

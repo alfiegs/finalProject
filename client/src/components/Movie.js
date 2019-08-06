@@ -4,6 +4,8 @@ import StarRating from './StarRating';
 import { saveToDB } from '../actions';
 import {connect} from 'react-redux';
 import {Container, Row, Col} from 'react-bootstrap';
+import requireAuth from '../requireAuth';
+
 
 
 
@@ -110,101 +112,111 @@ window.onclick = function(event) {
     }
 
 
-    render() {
-        // console.log(this.state.query);
-        // console.log(this.state.movies);
-        let imgURLBase = "https://image.tmdb.org/t/p/w185_and_h278_bestv2/"
-        return (
-            <>
-            <Row>
-                <Col md={1}></Col>
-                <Col>
-                <div class="movie-form">
-                    <h4>What movie did you watch today?</h4>
-                    <form onSubmit={this.handleSubmit}>
-                    <input 
-                    class="movie-input"
-                    onChange={this.handleQueryChange}
-                    placeholder='Type Movie Here'
 
-                    />
-                    <button type="submit">submit</button>
-                    </form>
-                </div>
-                </Col>
-            </Row>
-            <Row>
+render() {
+    // console.log(this.state.query);
+    // console.log(this.state.movies);
+    let imgURLBase = "https://image.tmdb.org/t/p/w185_and_h278_bestv2/"
+    return (
+        <>
+        <Row>
             <Col md={1}></Col>
-            <Col xs={10}>
-                    <br />
-                    {/* {this.state.query}
-                    {this.props.starRating} */}
-                    <br />
-                    {this.state.movies.map((movie, i)=>{
-                        let year = movie.release_date.slice(0, 4)
-                        let buttonId = "myBtn" + i;
-                        let modalId = "modal" + i
-                        return <>
-                        <button key={"expand"+i} onClick={this.movieClick} className="accordion">{movie.title} ({year})</button>
-                        <div key={"infodiv"+i} className="panel">
-                        <Row>
-                        <Col md={2}><img src={imgURLBase+movie.poster_path}></img></Col>
-                        <Col key={"info"+i}>{movie.overview}
+            <Col>
+            <div class="movie-form">
+                <h4>What movie did you watch today?</h4>
+                <form onSubmit={this.handleSubmit}>
+                <input 
+                class="movie-input"
+                onChange={this.handleQueryChange}
+                placeholder='Type Movie Here'
+
+                />
+                <button type="submit">Search</button>
+                </form>
+            </div>
+            </Col>
+        </Row>
+        <Row>
+        <Col md={1}></Col>
+        <Col xs={10}>
+                <br />
+                {/* {this.state.query}
+                {this.props.starRating} */}
+                <br />
+                {this.state.movies.map((movie, i)=>{
+                    let year = movie.release_date.slice(0, 4)
+                    let buttonId = "myBtn" + i;
+                    let modalId = "modal" + i
+                    return <>
+                    <Row>
+                    <Col>
+                    <div class="movie-bubble">
+                        <div class="movie-image-div"><img src={imgURLBase+movie.poster_path}></img></div>
+                        <div class="movie-info-div">
+                        <h5>{movie.title} ({year})</h5>
+                        <br />
+                        <div class="movie-overview">
+                        {movie.overview}
+                        </div>
                         <br />
                         <button id={buttonId} class="diditbutton" key={"save"+i} onClick={(e) => this.didIt(buttonId, modalId, e)}>Did It</button>
-                        </Col>
-                        </Row>
                         </div>
-                            <div id={modalId} class="modal">
+                    </div>
+                    </Col>
+                    </Row>
+                        {/* MODAL */}
+                        <div id={modalId} class="modal">
 
-                            <div class="modal-content">
-                                <span class="close">&times;</span>
-                                <span>{movie.title} ({year})</span>
-                                <StarRating />
-                                <hr />
-                                <span>What did you think?</span>
-                                <br />
-                                <input id="input-notes" /> 
-                                <br />
-                                <button onClick={(e) => this.handleSave(document.getElementById('input-notes').value, movie.title, modalId, e)}>Save</button>
-                            </div>
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <span>{movie.title} ({year})</span>
+                            <StarRating />
+                            <hr />
+                            <span>What did you think?</span>
+                            <br />
+                            <input id="input-notes" /> 
+                            <br />
+                            <button onClick={(e) => this.handleSave(document.getElementById('input-notes').value, movie.title, modalId, e)}>Save</button>
+                        </div>
 
 
 </div>
-                        </>
-                    })}
-                    <br />
-                    </Col>
-                    <Col md={1}></Col>
-                    </Row>
+                    </>
+                })}
+                <br />
+                </Col>
+                <Col md={1}></Col>
+                </Row>
 
 
-                    {/* <button class="accordion">Section 1</button>
-                    <div class="panel">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    </div>
+                {/* <button class="accordion">Section 1</button>
+                <div class="panel">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
 
-                    <button class="accordion">Section 2</button>
-                    <div class="panel">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    </div>
+                <button class="accordion">Section 2</button>
+                <div class="panel">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
 
-                    <button class="accordion">Section 3</button>
-                    <div class="panel">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    </div> */}
-
-
-
+                <button class="accordion">Section 3</button>
+                <div class="panel">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div> */}
 
 
 
-            
-            </>
 
-        );
-    }
+
+
+        
+        </>
+
+    );
 }
+}
+
+
 
 let mapDispatchToProps = (dispatch) =>{
     return {
@@ -220,3 +232,5 @@ let mapDispatchToProps = (dispatch) =>{
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Start)
+// export default requireAuth(connect(mapStateToProps, mapDispatchToProps)(Start))
+// export default requireAuth(Feature)

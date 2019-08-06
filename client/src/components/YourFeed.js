@@ -46,7 +46,9 @@ class YourFeed extends React.Component {
                     <hr />
                     <Row >
                         <Col md={3}>
+                        <div class="feed-post-overflow">
                             {x.title}
+                        </div>
                         </Col>
                         <Col md={2}>
                             <FeedStars rating={x.rating}/>  
