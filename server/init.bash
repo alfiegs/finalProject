@@ -7,6 +7,9 @@
 # sequelize model:generate --name friends \
     # --attributes userid:integer,friend:string,friendid:integer
 
+sequelize model:generate --name visitors \
+    --attributes name:string,email:string,comments:string
+
 
 
 

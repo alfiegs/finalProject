@@ -104,6 +104,13 @@ router.post('/saveFriendData', (req, res)=>{
     })
 })
 
+router.post('/visitorsTable', (req, res)=>{
+    let name = req.body.name;
+    let email = req.body.email;
+    let comment = req.body.comment;
+    db.visitors.create({name: name, email: email, comments:comment})
+})
+
 router.get('/api', (req, res) => {
     db.activity.findAll()
     .then((results) => {
