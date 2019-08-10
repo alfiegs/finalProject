@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { saveToDB } from '../actions';
 import axios from 'axios';
-import {Container, Row, Col} from 'react-bootstrap';
+import {Container, Row, Col, Button} from 'react-bootstrap';
 import FeedStars from './FeedStars';
 import requireAuth from '../requireAuth';
 
@@ -21,7 +21,7 @@ class Test extends React.Component {
 
   handleSave = (title, note, rating, e) => {
     e.preventDefault();
-    console.log(title, note, rating)
+    // console.log(title, note, rating)
     this.props.saveData({
       title: title,
       note: note,
@@ -35,7 +35,7 @@ class Test extends React.Component {
     .then((data)=>{
       console.log(data.data.data)
       this.setState({
-        activities: data.data.data
+        activities: data.data.data.reverse()
       })
     })
     axios.get('/friendsTable')
@@ -50,16 +50,16 @@ class Test extends React.Component {
 
 
   render() {
-    let activitiesList = this.state.activities.reverse()
-    console.log(this.state.activities)
     let friendsList = []
     let test = parseInt(this.state.userid)
     this.state.friends.forEach((entry)=>{
       if(entry.userid === test)
       friendsList.push(entry.friendid)
     })
-    console.log(test)
-    console.log(friendsList)
+    // console.log(test)
+    // console.log(friendsList)
+    let activitiesList = this.state.activities;
+    if(friendsList.length){
     return (
       <>
         <Container fluid={true}>
@@ -74,8 +74,10 @@ class Test extends React.Component {
                 return <>
                 <div class="feed-post">
                 <Row >
-                    <Col md={1}>
+                    <Col md={2}>
+                    <div class="feed-post-overflow">
                         {x.username}
+                    </div>
                     </Col>
                     <Col md={3}>
                     <div class="feed-post-overflow">
@@ -103,6 +105,19 @@ class Test extends React.Component {
             </Container>
       </>
     );
+    }else{
+      return <>
+                  <Row>
+                <Col md={4}></Col>
+                <Col>
+                
+            <p class="center-text">Add some friends to see what they're up to. </p>
+            <p class="center-text"><a href="/users"><Button id="add-friends-button">Friends</Button></a></p>
+                </Col>
+                <Col md={4}></Col>
+            </Row>
+      </>
+    }
   }
 }
 

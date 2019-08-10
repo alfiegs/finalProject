@@ -48,6 +48,7 @@ export const signin = (formProps, callback) => async dispatch => {
 export const signout = () => {
     localStorage.removeItem('token') //clear out local storage on sign out
     localStorage.removeItem('id')
+    localStorage.removeItem('username')
     return{
         type: AUTH_USER,
         payload: '', //sending empty string to clear out state
@@ -57,7 +58,7 @@ export const signout = () => {
 
 export const saveToDB = (data) => async dispatch => {
     // console.log(data)
-    axios.post('/savedata', {userid: data.userid, title: data.title, note: data.note, rating:data.rating, username:data.username, friendid: data.friendid})
+    axios.post('/savedata', {userid: data.userid, title: data.title, note: data.note, rating:data.rating, username:data.username})
 }
 
 export const saveFriendToDB = (data) => async dispatch => {
@@ -66,7 +67,7 @@ export const saveFriendToDB = (data) => async dispatch => {
 }
 
 export function saveStar(starRating) {
-    console.log(`starRating: ${starRating.rating}`)
+    console.log(`starRating in the action: ${starRating.rating}`)
     return {
         type: SAVE_STAR, 
         starRating: starRating.rating
@@ -77,6 +78,11 @@ export function saveStar(starRating) {
 export const saveIdAction = (id) => async dispatch => {
     console.log(id.id)
     axios.post('/friendsTable', {id: id})
+}
+
+export const saveVisitor = (data) => async dispatch => {
+    console.log(data.comment)
+    axios.post('/visitorsTable', {name: data.name, email: data.email, comment: data.comment})
 }
 
 

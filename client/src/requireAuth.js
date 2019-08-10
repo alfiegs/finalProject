@@ -22,7 +22,7 @@ export default ChildComponent => { //Child = SignUp
 
         shouldNavegateAway = () => {
             if(!this.props.auth){ //checks if anything in auth in state
-                this.props.history.push('/') //if nothing is there, navegate to home page
+                this.props.history.push('/signin') //if nothing is there, navegate to home page
             }
         }
         

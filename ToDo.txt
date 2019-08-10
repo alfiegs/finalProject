@@ -1,3 +1,17 @@
-1) username should appear on activity entry
 
-2) how to add friends?
+
+
+3) Fix lag on header welcome message when signing out/in
+
+4) Create new users for demo
+
+5) Make hover tooltip for comments in feed
+
+
+
+
+
+>> Dates on Feeds are accurate, but convert to month names?
+>> Remove friend
+>> Link to activities (movies, books, etc.)
+>> 

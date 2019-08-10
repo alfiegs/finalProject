@@ -32,10 +32,41 @@
   }
 }
 
+body{
+  background-color: rgb(237, 236, 240);
+}
 
 
+/* NAVBAR */
+.navbar{
+  background-color: rgb(83, 1, 83);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.nav-button-1{
+  color: white;
+}
 
-/* START */
+#nav-brand{
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 25px;
+  color: white;
+}
+
+.user-greeting{
+  color: white;
+}
+
+
+/* MOVIE */
+
+.movie-form{
+  margin: 0px 50px 0px 50px;
+}
+
+.movie-input{
+  width: 25vw;
+}
 
 .accordion {
   background-color: #eee;
@@ -48,6 +79,9 @@
   outline: none;
   font-size: 15px;
   transition: 0.4s;
+  margin: 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .active, .accordion:hover {
@@ -62,6 +96,24 @@
   transition: max-height 0.2s ease-out;
 }
 
+.movie-bubble{
+  background-color: white;
+  height: 350px;
+  margin: 20px;
+  padding: 30px;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.movie-image-div{
+float: left;
+margin: 0px 30px 0px 0px;
+}
+
+.movie-overview{
+  height: 100px;
+  overflow: scroll;
+}
 
 
 /* MODAL */
@@ -111,11 +163,24 @@
 
 
 
-/* YOUR FEED */
+/* OTHER */
+
+.other-input{
+  width: 100%;
+}
+
+#other-save-button{
+  width: 100%;
+  background-color: rgb(83, 1, 83);
+}
+
+
+/* FEEDS */
 
 
 .feed-post{
-  height: 2em;
+  height: 2.5em;
+  font-size: 20px;
 }
 
 .feed-post-date{
@@ -127,3 +192,150 @@
   height: 1.5em;
   overflow: scroll;
 }
+
+#add-friends-button{
+  background-color: purple;
+  border: none;
+}
+
+
+
+/* YOUR FRIENDS */
+
+#view-all-users{
+  background-color: purple;
+  border: none
+}
+
+.friend-bubble{
+  background-color: white;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+}
+
+
+/* BOOK SEARCH */
+.book-info{
+  font-size: 15px;
+}
+
+#book-search{
+  width: 25vw;
+}
+
+.buffer-row{
+  height:20px;
+}
+
+.diditbutton{
+  background-color: purple;
+  color: white;
+  border-radius: 25px;
+  width: 75px;
+}
+
+.book-image-div{
+  float: left;
+  margin: 0px 30px 0px 0px;
+}
+
+.book-bubble{
+  background-color: white;
+  padding: 30px;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+
+/* USERS */
+
+.user-bubble{
+  background-color: white;
+  padding: 30px;
+  margin: 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.user-add-button{
+  background-color: purple;
+  color: white;
+  border-radius: 25px;
+  padding: 0px 15px 0px 15px;
+}
+
+
+
+
+/* SIGN IN */
+.sign-in-button{
+  background-color: purple;
+  color: white;
+  width: 100%;
+}
+
+.sign-in-input{
+  width: 100%;
+}
+
+.sign-up-bio{
+  width: 100%;
+  height: 100px;
+}
+
+
+
+/* WELCOME */
+.welcome-bubble{
+  background-color: white;
+  padding: 30px;
+  margin: 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.welcome-bubble a{
+  color: purple;
+  border: 1px solid purple;
+  border-radius: 10px;
+  padding: 2px;
+  text-decoration: none;
+}
+
+#center-stars{
+  text-align: center;
+}
+
+
+
+
+/* GENERAL */
+.center-text{
+  text-align: center;
+}
+
+
+.footer{
+  background-color: rgb(85, 3, 85);
+}
+
+
+
+
+/* CONTACT */
+#contact-alfie{
+  background-color: purple;
+  margin: 50px;
+  padding: 10px;
+  color: white;
+  border-radius: 25px;
+}
+
+.hun-percent{
+  width: 100%;
+}
+

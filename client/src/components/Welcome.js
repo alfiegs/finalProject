@@ -1,6 +1,6 @@
 import React from 'react';
-import {Row, Col} from 'react-bootstrap';
-import StarRating from './StarRating'
+import {Row, Col, Button} from 'react-bootstrap';
+import StarRating from './StarRating';
 
 export default () => {
   return (
@@ -15,7 +15,9 @@ export default () => {
         all of the things you've been up to. 
       </div>
       </Col>
-      <Col md={4}></Col>
+      <Col md={4}>
+        <a href="/contact"><button id="contact-alfie">Get my resume!</button></a>
+      </Col>
     </Row>
 
     <Row>
@@ -30,7 +32,7 @@ export default () => {
       </Col>
       <Col md={1}></Col>
     </Row>
-
+ 
     <Row>
       <Col md={1}></Col>
       <Col>

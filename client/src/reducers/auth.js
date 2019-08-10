@@ -9,7 +9,7 @@ const Initial_State = {
 }
 
 let auth = (state = Initial_State, action) => {
-    console.log(state.userId)
+    // console.log(state.userId)
     switch(action.type){
         case AUTH_USER: 
             return{

@@ -24,7 +24,7 @@ class SignIn extends React.Component {
     const { handleSubmit } = this.props //handleSubmit is function from redux-forms that takes in a function we create, onSubmit
     return (
       <>
-      <Row>
+      <Row >
         <Col md={4}></Col>
         <Col md={4}>
         <h4>Please Sign In</h4>

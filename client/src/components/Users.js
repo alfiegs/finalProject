@@ -36,18 +36,15 @@ class Users extends React.Component {
         console.log(idFromLocalStorage)
         console.log(id)
         if(idFromLocalStorage === id){
-          console.log('error')
-          this.setState({
-            error: "You can't friend yourself."
-          })
+          alert(`You can't friend yourself`)
         }else{
+          alert(`You started following ${email}`)
         this.props.saveFriend({
             friendemail: email,
             friendid: id,
             userid: idFromLocalStorage
         })
       }
-        alert(`You started following ${email}`)
     }
 
     render() {

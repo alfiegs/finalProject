@@ -35,49 +35,62 @@ class YourFeed extends React.Component {
         let activitiesList = this.state.activities.reverse()
         // console.log(`userid: ${this.state.userid}`)
         let userIdInt = parseInt(this.state.userid)
+        if(activitiesList.length != 0){
         return (
             <>
-            <Container fluid={true}>
-                {activitiesList.map((x)=> {
-                    var date = new Date(x.createdAt);
-                    var year = date.getFullYear();
-                    var day = date.getDay();
-                    var month = date.getMonth();
-                    var hour = date.getHours();
-                    var minutes = date.getMinutes();
-                    if(x.userid === userIdInt){
-                    return <>
-                    <div class="feed-post">
-                    <hr />
-                    <Row >
-                        <Col md={3}>
-                        <div class="feed-post-overflow">
-                            {x.title}
-                        </div>
-                        </Col>
-                        <Col md={2}>
-                            <FeedStars rating={x.rating}/>  
-                        </Col>
-                        <Col >
-                            <div class="feed-post-overflow ">
-                            {x.note}
+                <Container fluid={true}>
+                    {activitiesList.map((x)=> {
+                        var date = new Date(x.createdAt);
+                        var year = date.getFullYear();
+                        var day = date.getDay();
+                        var month = date.getMonth();
+                        var hour = date.getHours();
+                        var minutes = date.getMinutes();
+                        if(x.userid === userIdInt){
+                        return <>
+                        <div class="feed-post">
+                        <hr />
+                        <Row >
+                            <Col md={3}>
+                            <div class="feed-post-overflow">
+                                {x.title}
                             </div>
-                            {/* <Tooltip note={x.note}/> */}
-                        </Col>
-                        <Col md={2}>
-                            {/* <p class="feed-post-date">{x.createdAt}</p> */}
-                            <span class="feed-post-date">Posted on </span>
-                            <span class="feed-post-date">{month}-{day}-{year} at {hour}:{minutes}</span>
-                        </Col>
-                    </Row>
-                    </div>
-                    </>
-                    }
-                })}
+                            </Col>
+                            <Col md={2}>
+                                <FeedStars rating={x.rating}/>  
+                            </Col>
+                            <Col >
+                                <div class="feed-post-overflow ">
+                                {x.note}
+                                </div>
+                                {/* <Tooltip note={x.note}/> */}
+                            </Col>
+                            <Col md={2}>
+                                {/* <p class="feed-post-date">{x.createdAt}</p> */}
+                                <span class="feed-post-date">Posted on </span>
+                                <span class="feed-post-date">{month}-{day}-{year} at {hour}:{minutes}</span>
+                            </Col>
+                        </Row>
+                        </div>
+                        </>
+                        }
+                    })}
                 </Container>
-
             </>
         );
+        }else{
+            return<>
+            <Row>
+                <Col md={4}></Col>
+                <Col>
+                
+            <p class="center-text">Your activity log is empty.</p>
+            <p class="center-text">Add a <a href="/movie">movie</a>, <a href="/book">book</a>, <a href="/place">place</a>, or <a href="/other">anything else</a>.</p>
+                </Col>
+                <Col md={4}></Col>
+            </Row>
+            </>
+        }
     }
 }
 

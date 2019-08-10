@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Navbar, Nav, NavDropdown, Button, Form, FormControl} from 'react-bootstrap';
+import {connect} from 'react-redux';
 
 
 class Header extends React.Component {
@@ -27,13 +28,13 @@ componentDidMount() {
   }else{
     message = Welcome
   }
-  console.log(userid)
   this.setState({
-    userid: userid,
     username: username,
     message: message
   })
 }
+
+
 
   render() {
     let userid = localStorage.getItem("id")
@@ -46,10 +47,9 @@ componentDidMount() {
     }else{
       message = Welcome
     }
+    // console.log(`this.state.userid: ${this.state.userid}`)
     return (
       <>
-
-
         <Navbar variant="dark" expand="lg" class="navbar" sticky="top" >
           <Navbar.Brand id="nav-brand" href="/">What I Did Today</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -101,9 +101,14 @@ componentDidMount() {
   }
 }
 
+let mapStateToProps = (state) => {
+  return{
+    starRating: state.main.starRating,
+    userId: state.auth.userId
+  }
+}
 
 
-
-export default Header
+export default connect(mapStateToProps, null)(Header)
 
 
